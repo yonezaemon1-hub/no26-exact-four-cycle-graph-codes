@@ -39,6 +39,6 @@ The first script searches for the witness JSON beside itself; it can run from an
 
 To the best of the author's knowledge, these particular finite values and the all-n linear formula were not found in the literature examined. **This is not a priority or first-discovery claim.** Historical novelty remains open. Readers knowing earlier or overlapping work may write to **yonezaemon1+research@gmail.com**.
 
-**Citation:** Ryutaro Yonezu, *Finite Nonlinear Separations for Exact Four-Cycle Graph Codes*, Yonezu Research Lab, unrefereed preprint v1.4 (2026). **DOI pending**.
+**Citation:** Ryutaro Yonezu, *Finite Nonlinear Separations for Exact Four-Cycle Graph Codes*, Yonezu Research Lab, unrefereed preprint v1.4 (2026). **DOI:** [10.5281/zenodo.23386988](https://doi.org/10.5281/zenodo.23386988).
 
-No reuse license has been granted in this repository at this stage. A license should be selected by the author before deciding what permissions to grant for the paper and source code; public visibility alone does not grant all reuse rights.
+**Rights:** © 2026 Ryutaro Yonezu. All rights reserved. No permission is granted for reproduction, redistribution, modification, or commercial reuse without prior written permission, except as permitted by applicable law. This repository grants no separate reuse license.
