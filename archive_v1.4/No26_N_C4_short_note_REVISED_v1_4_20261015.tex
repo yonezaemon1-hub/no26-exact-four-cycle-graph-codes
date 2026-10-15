@@ -1,0 +1,164 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm,booktabs,geometry,microtype,hyperref}
+\geometry{margin=27mm}
+\hypersetup{colorlinks=true,urlcolor=blue,linkcolor=black,citecolor=blue,pdftitle={Finite Nonlinear Separations for Exact Four-Cycle Graph Codes}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{remark}{Remark}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Cfour}{C_4}
+\newcommand{\binomtwo}[1]{\binom{#1}{2}}
+\title{Finite Nonlinear Separations for Exact Four-Cycle Graph Codes}
+\author{Ryutaro Yonezu\\\small Yonezu Research Lab}
+\date{Research draft --- 15 October 2026\\\small v1.4 (independent computational cross-check completed; unrefereed)}
+\begin{document}
+\maketitle
+\begin{abstract}
+Identify labelled graphs on $[n]$ with vectors of $\F_2^{\binom{n}{2}}$, and prohibit pairs whose symmetric difference is \emph{exactly} the edge set of a four-cycle, with all remaining edges absent. We determine the maximum linear code size for every $n\ge4$, namely $2^{\binom n2-\lceil\log_2 n\rceil}$. At $n=5$ the unrestricted maximum is $192$, whereas the linear maximum is $128$. We give an explicit small clique-cover certificate for the unrestricted bound and a construction attaining it. We further prove the exact six-vertex value $D_{C_4}(6)=6144>4096=D^{\mathrm{lin}}_{C_4}(6)$ by a finite Fourier-positive kernel certificate and a reproducible matching construction. This note separates mathematical verification from the still unresolved question of publication priority. A 2026 survey already gives nonlinear-versus-linear gaps for broader forbidden \emph{families}; no claim of the first such gap in general is made here.
+\end{abstract}
+
+\section{Definitions and context}
+Put $m=\binom n2$. Represent a graph on $[n]$ by its edge-indicator vector $x\in\F_2^m$. Let $F_n\subseteq\F_2^m$ be the set of $3\binom n4$ vectors whose nonzero coordinates form exactly the four edges of a labelled $C_4$. A set $A\subseteq\F_2^m$ is $C_4$-admissible when $x+y\notin F_n$ for every distinct $x,y\in A$. Write
+\[
+D_{C_4}(n)=\max_{A\;C_4\text{-admissible}}|A|,
+\qquad D_{C_4}^{\mathrm{lin}}(n)=\max_{\substack{A\le\F_2^m\\ A\cap F_n=\varnothing}}|A|.
+\]
+This is the exact-copy problem introduced in Alon's graph-code framework~\cite{Alon2024}; it is \emph{not} the stricter problem that forbids differences merely \emph{containing} a four-cycle. Linear variants and associated odd edge-colouring ideas have been studied in~\cite{Versteegen2025,Bennett2023}.
+
+\section{The linear optimum}
+\begin{theorem}\label{thm:linear}
+For every $n\ge4$,
+\[
+\boxed{D_{C_4}^{\mathrm{lin}}(n)=2^{\binom n2-\lceil\log_2n\rceil}.}
+\]
+For $n\le3$, no $C_4$ occurs and the unrestricted graph space is admissible.
+\end{theorem}
+\begin{proof}
+A parity-check map $\F_2^m\to\F_2^r$ is described by edge labels $c_{uv}\in\F_2^r$, and its kernel avoids $F_n$ precisely when the sum of the labels around each $C_4$ is nonzero. The construction is immediate from a field: let $q=2^{\lceil\log_2 n\rceil}$, choose distinct $x_1,\ldots,x_n\in\F_q$, and put $c_{ij}=x_ix_j$. For a cycle $(a,b,c,d,a)$ the sum equals
+\[
+  (x_a+x_c)(x_b+x_d)\ne0.
+\]
+Thus a parity-check map with at most $\lceil\log_2 n\rceil$ bits exists.
+
+For the lower bound, first $r=0$ is impossible on $K_4$. If $r=1$, the three distinct four-cycles on a fixed $K_4$ have edge sets whose XOR is zero. All three would have to map to the unique nonzero value $1$, an impossibility. Now let $r\ge2$ and put $q=2^r$. Suppose $K_{q+1}$ has edge labels $c_{uv}\in\F_2^r$ with nonzero sum on every four-cycle. For each vertex define $s_u=\sum_{v\ne u}c_{uv}$ and switch labels by
+\[
+ c'_{uv}=c_{uv}+s_u+s_v.
+\]
+Four-cycle sums are unchanged. Since $q$ is even and $\sum_u s_u=0$, the sum of the $q$ switched labels incident with any vertex is zero.
+
+Fix distinct vertices $u,v$. For their $q-1$ other neighbours $w$, set $d_w=c'_{uw}+c'_{vw}$. Any two $d_w$ are distinct: equality would yield a four-cycle of label sum zero. Also $\sum_{w\ne u,v}d_w=0$, by the zero incident sums at $u,v$. The XOR of \emph{all} $q$ elements of $\F_2^r$ is zero when $r\ge2$. Consequently, the one vector missing from the $q-1$ distinct values $d_w$ must be zero. Therefore $d_w\ne0$ for every $w$.
+
+It follows that any two edges incident with a common vertex have different labels. Every vertex of $K_{q+1}$ has degree $q$, and there are precisely $q$ labels: every label occurs on exactly one edge incident with every vertex. The edges of any fixed label would form a perfect matching of $K_{q+1}$, contradicting its odd order. Thus $K_{q+1}$ is impossible with $r$ bits. Restricting any labelling on $K_n$ to $q+1$ vertices shows that $n\le2^r$. Hence $r\ge\lceil\log_2n\rceil$.
+\end{proof}
+
+\section{An exact nonlinear separation on five vertices}
+\begin{theorem}\label{thm:nonlinear5}
+For the exact-$C_4$ forbidden-difference problem,
+\[
+\boxed{D_{C_4}(5)=192>128=D_{C_4}^{\mathrm{lin}}(5).}
+\]
+\end{theorem}
+\begin{proof}
+Order the ten coordinates as
+$01,02,03,04,12,13,14,23,24,34$ (with vertices $0,\ldots,4$), and interpret bit masks as integers. The fifteen forbidden $C_4$ masks span a five-dimensional subspace $S\le\F_2^{10}$; for example, the forbidden masks $54,90,149,281,553$ are linearly independent. The span is exactly the space of even-degree, even-edge-count graphs: its five-dimensionality follows from the four independent vertex-degree parity constraints and one additional independent edge-parity constraint. In particular $\F_2^{10}$ splits into $2^5=32$ cosets of $S$, and forbidden differences connect elements within the same coset only.
+
+Any admissible set inside a coset may be translated to contain $0$. Its further members must avoid the fifteen forbidden masks. There are precisely sixteen eligible nonzero masks, and they admit the following partition into five \emph{conflict cliques} (each pair within a row has forbidden XOR):
+\[
+\begin{array}{llll}
+207&303&543&1023\\
+249&373&627&\\
+442&470&915&\\
+700&742&933&\\
+860&874&969&
+\end{array}
+\]
+Thus at most one additional member comes from each row, for at most $1+5=6$ codewords per coset. The six masks
+\[
+  B=\{0,207,373,700,874,915\}
+\]
+indeed have no forbidden pairwise difference. Taking a translated copy of $B$ in each of the 32 cosets gives $32\cdot6=192$ graph-codewords; differences across different cosets cannot be forbidden. Therefore the upper bound is attained. The linear figure $128$ follows from Theorem~\ref{thm:linear}.
+\end{proof}
+
+\begin{remark}
+The conflict graph on the fifteen eligible masks other than $1023$ is isomorphic to the Kneser graph $KG(6,2)$, while $1023$ conflicts with all fifteen. This provides a conceptual interpretation of the five-row partition; the explicit partition and witness suffice for the proof.
+\end{remark}
+
+\section{An exact six-vertex separation}
+\begin{theorem}\label{thm:six}
+For the exact-$C_4$ forbidden-difference problem,
+\[
+\boxed{D_{C_4}(6)=6144>4096=D_{C_4}^{\mathrm{lin}}(6).}
+\]
+\end{theorem}
+\begin{proof}
+Let $F$ denote the $45$ forbidden four-cycle vectors in $V=\F_2^{15}$, and let
+$S=\langle F\rangle$. Elementary binary elimination gives $\dim S=9$; hence
+$V$ is a disjoint union of $64$ conflict-isomorphic cosets of $S$. It suffices
+to prove that the Cayley conflict graph $\operatorname{Cay}(S,F)$ has independence
+number $96$. A $96$-word admissible seed in $S$ is supplied by the machine-readable
+witness \texttt{no26\_n6\_improved\_witness\_6144.json}. Its validity is checked
+by the independent code in the companion evidence.
+
+For the matching upper bound, let $T\subset S$ be the ten edge sets that are
+disjoint unions of two triangles partitioning the six vertices. Define
+\[
+K(x)=96\mathbf{1}_{\{0\}}(x)-1+
+\frac{32}{3}\mathbf{1}_F(x)-\frac{32}{5}\mathbf{1}_T(x),\qquad x\in S.
+\]
+Then $K(0)=95$, and $K(x)\le-1$ for every $x\ne0$ outside $F$.
+We claim $K$ is positive definite. For a character $\chi:S\to\{\pm1\}$,
+write $a_\chi=\sum_{f\in F}\chi(f)$ and
+$b_\chi=\sum_{t\in T}\chi(t)$. For the trivial character,
+$\widehat K(1)=96-512+(32/3)45-(32/5)10=0$. For each nontrivial
+character,
+\[
+\widehat K(\chi)=\frac{32}{15}(45+5a_\chi-3b_\chi).
+\]
+The full joint spectrum is enumerated in the table below. Every entry in the
+last column is nonnegative, proving $\widehat K(\chi)\ge0$ for all characters.
+The last row is the trivial character, whose actual Fourier value is $0$ as
+computed separately. These integers can be reproduced by enumerating the
+$2^{15}$ ambient edge-parity characters, each of whose restrictions to $S$
+occurs $2^6$ times.
+\[
+\begin{array}{rr|rr@{\qquad}rr|rr}
+ a_\chi & b_\chi & \#\chi & 45+5a_\chi-3b_\chi &
+ a_\chi & b_\chi & \#\chi & 45+5a_\chi-3b_\chi\\\hline
+ -15&-10&6&0 & -7&-2&90&16\\
+ -3&2&180&24 & -3&10&15&0\\
+ 1&-2&90&56 & 5&2&45&64\\
+ 9&-10&10&120 & 9&-2&60&96\\
+ 21&2&15&144 & 45&10&1&240
+\end{array}
+\]
+For any $F$-admissible $A\subseteq S$ of size $M$, Fourier positivity yields
+\[
+0\le\sum_{u,v\in A}K(u+v)
+=\frac{1}{512}\sum_{\chi}\widehat K(\chi)
+\left|\sum_{u\in A}\chi(u)\right|^2
+\le 95M-M(M-1)=M(96-M).
+\]
+Therefore $M\le96$. The verified seed attains $96$, and independent
+translations to the $64$ cosets of $S$ give $64\cdot96=6144$ words.
+The linear figure follows from Theorem~\ref{thm:linear}.
+\end{proof}
+
+\section{Scope and priority status}
+This draft reports exact finite results at $n=5,6$ and a linear all-$n$ formula. No asymptotic separation for a fixed $C_4$ is claimed. In particular, Alon's 2026 survey~\cite{Alon2026} presents already-known substantial nonlinear-versus-linear gaps for \emph{families} of forbidden graphs, so nonlinear superiority per se is not a new observation. The survey was located in full text during this audit; the specific singleton-$C_4$, five-vertex numerical statement was not found in the reviewed passages. Absence in those passages is not a proof of publication priority. The all-$n$ parity-check formula likewise requires historical comparison with zero-sum edge-labelling literature. \textbf{This manuscript is a review draft, not a claim of first discovery or a refereed publication.}
+
+\paragraph{Prior-art inquiries.}
+To the best of the author's knowledge, the exact values $D_{C_4}(5)=192$, $D_{C_4}(6)=6144$ and the linear all-$n$ formula in this note were not found in the literature examined. This statement is limited to the sources reviewed and does not establish priority. Readers aware of earlier or overlapping results are invited to contact Yonezu Research Lab at \href{mailto:yonezaemon1+research@gmail.com}{\texttt{yonezaemon1+research@gmail.com}}.
+
+\paragraph{Reproducibility.}
+A standard-library Python script independently reconstructs all forbidden masks, checks the five conflict cliques and the six-word seed, and verifies the $192$-word expanded code. Two further integer-only verifiers check the six-vertex positive-definite spectral certificate in different coordinate systems, and reconstruct the $6144$-word witness with all pairwise differences. The accompanying reproducibility record contains SHA-256 hashes for the input witness, verification certificates, and proof scripts. The exact six-vertex Fourier spectrum, kernel conditions, and matching construction have also been independently recomputed using a separate implementation. This does not constitute professional peer review; historical priority remains unresolved.
+
+\begin{thebibliography}{9}
+\bibitem{Alon2024} N.~Alon, \emph{Graph-codes}, European J. Combin. \textbf{116} (2024), article 103880. \url{https://doi.org/10.1016/j.ejc.2023.103880}.
+\bibitem{Versteegen2025} L.~Versteegen, \emph{Upper bounds for linear graph codes}, Random Structures \& Algorithms \textbf{66} (2025), e21263. \url{https://doi.org/10.1002/rsa.21263}.
+\bibitem{Bennett2023} P.~Bennett, E.~Heath and S.~Zerbib, \emph{Edge-coloring a graph $G$ so that every copy of a graph $H$ has an odd color class}, arXiv:2307.01314 (2023). \url{https://arxiv.org/abs/2307.01314}.
+\bibitem{Alon2026} N.~Alon, \emph{Graph-codes: questions, results and methods}, Japanese J. Math. \textbf{21} (2026), 145--164. \url{https://doi.org/10.1007/s11537-026-2536-1}. Author-hosted full text: \url{https://web.math.princeton.edu/~nalon/PDFS/gcs4.pdf}.
+\end{thebibliography}
+\end{document}

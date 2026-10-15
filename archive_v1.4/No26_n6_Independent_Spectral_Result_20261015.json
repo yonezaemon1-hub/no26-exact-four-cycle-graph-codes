@@ -1,0 +1,69 @@
+{
+  "status": "PASS",
+  "certificate": "exact positive type kernel",
+  "classes": [
+    {
+      "lambda_F": -15,
+      "lambda_T": -10,
+      "multiplicity": 6,
+      "weight_factor": 0
+    },
+    {
+      "lambda_F": -7,
+      "lambda_T": -2,
+      "multiplicity": 90,
+      "weight_factor": 16
+    },
+    {
+      "lambda_F": -3,
+      "lambda_T": 2,
+      "multiplicity": 180,
+      "weight_factor": 24
+    },
+    {
+      "lambda_F": -3,
+      "lambda_T": 10,
+      "multiplicity": 15,
+      "weight_factor": 0
+    },
+    {
+      "lambda_F": 1,
+      "lambda_T": -2,
+      "multiplicity": 90,
+      "weight_factor": 56
+    },
+    {
+      "lambda_F": 5,
+      "lambda_T": 2,
+      "multiplicity": 45,
+      "weight_factor": 64
+    },
+    {
+      "lambda_F": 9,
+      "lambda_T": -10,
+      "multiplicity": 10,
+      "weight_factor": 120
+    },
+    {
+      "lambda_F": 9,
+      "lambda_T": -2,
+      "multiplicity": 60,
+      "weight_factor": 96
+    },
+    {
+      "lambda_F": 21,
+      "lambda_T": 2,
+      "multiplicity": 15,
+      "weight_factor": 144
+    },
+    {
+      "lambda_F": 45,
+      "lambda_T": 10,
+      "multiplicity": 1,
+      "weight_factor": 240
+    }
+  ],
+  "rank": 9,
+  "component_independence_upper": 96,
+  "global_upper": 6144
+}

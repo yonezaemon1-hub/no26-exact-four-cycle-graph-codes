@@ -1,0 +1,59 @@
+{
+  "claim": "D_C4(6) = 6144 (exact)",
+  "status": "PASS",
+  "forbidden_masks": 45,
+  "span_rank": 9,
+  "span_size": 512,
+  "coset_count": 64,
+  "orbit_sizes": [
+    1,
+    6,
+    10,
+    15,
+    15,
+    45,
+    60,
+    90,
+    90,
+    180
+  ],
+  "orbit_representatives": [
+    0,
+    5871,
+    5905,
+    510,
+    15870,
+    102,
+    1880,
+    655,
+    6007,
+    957
+  ],
+  "dual_character_weights": {
+    "1": 24,
+    "3": 12,
+    "4": 9,
+    "5": 21,
+    "6": 5,
+    "17": 18,
+    "37": 6
+  },
+  "integer_weighted_character_sums": [
+    95,
+    -6,
+    -74,
+    -15,
+    -15,
+    435,
+    -60,
+    -90,
+    -90,
+    -180
+  ],
+  "component_upper_exact": 96,
+  "seed_size": 96,
+  "expanded_code_size": 6144,
+  "unordered_pairs_verified": 18871296,
+  "conflicts": 0,
+  "witness_sha256": "fce26a856329a1268d549ed51af558efae5c5d154787af35289de0a69a064335"
+}
